@@ -291,6 +291,16 @@ http://ricostacruz.com/cheatsheets/umdjs.html
         }
       }
       return false; // None were truthy
+    }else if(op === "count") {
+      var scopedData = jsonLogic.apply(values[0], data);
+      var scopedLogic = values[1];
+      var count = 0;
+      for(i=0; i < scopedData.length; i+=1) {
+        if(jsonLogic.truthy( jsonLogic.apply(scopedLogic, scopedData[i]) )) {
+          count++;
+        }
+      }
+      return count;
     }
 
     // Everyone else gets immediate depth-first recursion
